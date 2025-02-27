@@ -3,6 +3,7 @@
 
     Author: José De La Cruz
     Created: 2019-08-04
+    Modified: 2025-02-27
 """
 import math
 
@@ -16,11 +17,32 @@ class Calculator:
         self.pos_value = ''
 
 
-    def operations(self, caption):
+    def click_button(self, caption): 
         """Insert the clicks given by the user (numbers and symbols)"""
         self.value += caption
         self.memory = self.value
         return self.value
+
+
+    # verificar la implementación de esta función - clear_display
+    def clear_button(self):
+        """Clean text box"""
+        self.value = ''
+        self.memory = ''
+        self.pos_value = ''
+
+
+    def undo_button(self):
+        """Delete the last character and/or number entered"""
+        if self.memory != '':
+            return self.memory
+        else:
+            if self.value != '':
+                cadena = len(self.value)
+                self.value = self.value[:cadena - 1]
+                return self.value
+            else:
+                return 'No hay datos'
 
 
     def replace_button(self):
@@ -31,8 +53,8 @@ class Calculator:
             temp = temp.replace(',', '.')
             temp = temp.replace('%', '/100')
             temp = temp.replace('\u00b2', '**2')
-            #self.value = temp.replace('√', '**(1/2)')
-            self.value = temp.replace('\u00bd', '**(1/2)')
+            temp = temp.replace('\u00bd', '**(1/2)')
+            self.value = temp.replace('⁻¹', '**-1')
         return self.value
 
 
@@ -67,24 +89,12 @@ class Calculator:
             self.value = self.replace_point_result(
                 self.decimal_or_integer(res))
         return self.value
+    
 
-
-    def button_undo(self):
-        """Delete the last character and/or number entered"""
-        if self.memory != '':
-            return self.memory
-        else:
-            if self.value != '':
-                cadena = len(self.value)
-                self.value = self.value[:cadena - 1]
-                return self.value
-            else:
-                return 'No hay datos'
-
-
-    # verificar la implementación de esta función
-    def button_clear(self):
-        """Clean text box"""
-        self.value = ''
-        self.memory = ''
-        self.pos_value = ''
+    def factorial_button(n):
+        # n = int(n)
+        # if n == 0 or n == 1:
+        #     return 1
+        # else:
+        #     return n * factorial(n-1)
+        return math.factorial(n)
