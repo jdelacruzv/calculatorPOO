@@ -31,7 +31,9 @@ class Controller:
         elif func == 'C':
             result = self.calculator.clear_button()
             self.gui.var_display.set(result)
-            # self.gui.var_display.set('')
+        elif func == '🠔':
+            result = self.calculator.undo_button()
+            self.gui.var_display.set(result)
         elif func == 'Deshacer':
             result = self.calculator.button_undo()
             self.gui.var_display.set(result)

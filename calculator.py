@@ -21,7 +21,6 @@ class Calculator:
         return self.value
 
 
-    # verificar la implementación de esta función - clear_display
     def clear_button(self):
         """Clean text box"""
         self.value = ''
@@ -30,15 +29,12 @@ class Calculator:
 
     def undo_button(self):
         """Delete the last character and/or number entered"""
-        if self.memory != '':
-            return self.memory
+        if self.value != '':
+            cadena = len(self.value)
+            self.value = self.value[:cadena - 1]
+            return self.value
         else:
-            if self.value != '':
-                cadena = len(self.value)
-                self.value = self.value[:cadena - 1]
-                return self.value
-            else:
-                return 'No hay datos'
+            return 'No hay datos'
 
 
     def replace_button(self):

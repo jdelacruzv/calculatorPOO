@@ -165,7 +165,7 @@ class Gui(tk.Tk):
             command=lambda: self.controller.on_click_function('C')
             ).grid(row=5, column=0, ipadx=IPADX, ipady=IPADY)
         self.btn_undo = ttk.Button(self.frm_buttons, text='🠔', 
-            command=lambda: self.controller.undo_button()
+            command=lambda: self.controller.on_click_function('🠔')
             ).grid(row=5, column=1, ipadx=IPADX, ipady=IPADY)
         self.btn_rig_par = ttk.Button(self.frm_buttons, text='(', 
             command=lambda: self.controller.on_click_button('(')
