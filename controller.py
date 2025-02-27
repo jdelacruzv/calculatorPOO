@@ -25,7 +25,7 @@ class Controller:
     def on_click_function(self, func):
         """Call the functions: equal, clean or undo of the Calculator class"""
         if func == '=':
-            result = self.calculator.button_equals()
+            result = self.calculator.equals_button()
             self.gui.var_display.set(result)
         elif func == 'Limpiar':
             self.gui.var_display.set('')

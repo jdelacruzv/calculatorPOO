@@ -173,7 +173,7 @@ class Gui(tk.Tk):
             command=lambda: self.controller.on_click_button(')')
             ).grid(row=5, column=3, ipadx=IPADX, ipady=IPADY)
         self.btn_equals = ttk.Button(self.frm_buttons, text='=', 
-            command=lambda: self.controller.equals_button()
+            command=lambda: self.controller.on_click_function('=')
             ).grid(row=5, column=4, ipadx=IPADX, ipady=IPADY)
 
 

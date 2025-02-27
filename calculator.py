@@ -77,7 +77,7 @@ class Calculator:
             return 'Expresión incorrecta'
 
 
-    def button_equals(self):
+    def equals_button(self):
         """Perform the data operation"""
         self.replace_button()
         res = None
