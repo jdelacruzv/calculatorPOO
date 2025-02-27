@@ -23,6 +23,7 @@ class Gui(tk.Tk):
         self.resizable(False, False)
         #self.center_window(335, 405) # 325, 380
         self.controller = controller
+        # 
         self.var_display = tk.StringVar()
 
         # create menu icons
@@ -161,7 +162,7 @@ class Gui(tk.Tk):
 
         # row 5
         self.btn_clear = ttk.Button(self.frm_buttons, text='C', 
-            command=lambda: self.controller.clear_display()
+            command=lambda: self.controller.on_click_function('C')
             ).grid(row=5, column=0, ipadx=IPADX, ipady=IPADY)
         self.btn_undo = ttk.Button(self.frm_buttons, text='🠔', 
             command=lambda: self.controller.undo_button()

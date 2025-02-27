@@ -3,6 +3,7 @@
 
     Author: José De La Cruz
     Created: 2019-08-04
+    Modified: 2025-02-27
 """
 from calculator import Calculator
 from gui import Gui
@@ -27,8 +28,10 @@ class Controller:
         if func == '=':
             result = self.calculator.equals_button()
             self.gui.var_display.set(result)
-        elif func == 'Limpiar':
-            self.gui.var_display.set('')
+        elif func == 'C':
+            result = self.calculator.clear_button()
+            self.gui.var_display.set(result)
+            # self.gui.var_display.set('')
         elif func == 'Deshacer':
             result = self.calculator.button_undo()
             self.gui.var_display.set(result)

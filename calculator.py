@@ -13,14 +13,11 @@ class Calculator:
 
     def __init__(self):
         self.value = ''
-        self.memory = ''
-        self.pos_value = ''
-
+        
 
     def click_button(self, caption): 
         """Insert the clicks given by the user (numbers and symbols)"""
         self.value += caption
-        self.memory = self.value
         return self.value
 
 
@@ -28,8 +25,7 @@ class Calculator:
     def clear_button(self):
         """Clean text box"""
         self.value = ''
-        self.memory = ''
-        self.pos_value = ''
+        return self.value
 
 
     def undo_button(self):
