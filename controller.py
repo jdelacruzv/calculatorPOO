@@ -18,7 +18,7 @@ class Controller:
 
     def on_click_button(self, caption):
         """Send the clicks given by the user to the Calculator class"""
-        result = self.calculator.operations(caption)
+        result = self.calculator.click_button(caption)
         self.gui.var_display.set(result)
 
 
