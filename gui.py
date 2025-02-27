@@ -21,11 +21,11 @@ class Gui(tk.Tk):
         self.title('Calculadora')
         self.iconphoto(True, tk.PhotoImage(file='icons/calculadora.png'))
         self.resizable(False, False)
-        self.center_window(490, 225)
+        #self.center_window(335, 405) # 325, 380
         self.controller = controller
         self.var_display = tk.StringVar()
 
-        # add menu icons
+        # create menu icons
         self.img_copy = tk.PhotoImage(file='icons/copy.gif')
         self.img_paste = tk.PhotoImage(file='icons/paste.gif')
         self.img_undo = tk.PhotoImage(file='icons/undo.gif')
@@ -35,11 +35,11 @@ class Gui(tk.Tk):
         self.img_help = tk.PhotoImage(file='icons/help.png')
         self.img_about = tk.PhotoImage(file='icons/about.gif')
 
-        # add menu bar
+        # create menu bar
         self.menubar = tk.Menu(self, tearoff=0, relief=tk.FLAT)
         self.configure(menu=self.menubar)
 
-        # add menu file
+        # create menu file
         self.filemenu = tk.Menu(self.menubar, tearoff=0)
         self.menubar.add_cascade(label='Archivo', menu=self.filemenu)
         self.filemenu.add_command(label='Copiar', command=None, accelerator='Ctrl+C', image=self.img_copy, compound=tk.LEFT)
@@ -51,105 +51,130 @@ class Gui(tk.Tk):
         self.filemenu.add_separator()
         self.filemenu.add_command(label='Salir', command=self.quit, accelerator='Ctrl+Q', image=self.img_exit, compound=tk.LEFT)
 
-        # add menu help
+        # create menu help
         self.ayudamenu = tk.Menu(self.menubar, tearoff=0)
         self.menubar.add_cascade(label='Ayuda', menu=self.ayudamenu)
         self.ayudamenu.add_command(label='Ayuda', command=None, image=self.img_help, accelerator='F1', compound=tk.LEFT)
         self.ayudamenu.add_command(label='Acerca de', command=None, image=self.img_about, compound=tk.LEFT)
 
-        # display frame
+        # create display frame
         self.frm_display = ttk.Frame(self)
-        self.frm_display.grid(row=1, column=0, padx=5, pady=5)
+        self.frm_display.grid(row=0, column=0, padx=5, pady=5)
 
         # row 0: display
-        self.ety_display = ttk.Entry(self.frm_display, textvariable=self.var_display, width=31, justify=tk.RIGHT, 
-                                     font=('Consola', 16, 'bold'))
-        self.ety_display.grid(row=1, column=0, columnspan=4, ipady=10)
+        self.ety_display = tk.Entry(
+            self.frm_display, 
+            textvariable=self.var_display, 
+            width=21, # 17 
+            justify=tk.RIGHT, 
+            takefocus=False,
+            font=('Consola', 20, 'bold'),
+            background='#282828',
+            foreground='#FFFFE0',
+            relief='flat'
+        )
+        self.ety_display.grid(row=0, column=0, columnspan=6, ipady=20)
 
-        # buttons frame
+        # row 1: buttons frame
         self.frm_buttons = ttk.Frame(self)
-        self.frm_buttons.grid(row=2, column=0, padx=5, pady=5)
+        self.frm_buttons.grid(row=1, column=0, padx=5, pady=5)
+
+        # horizontal and vertical inner margin
+        IPADX=6 
+        IPADY=15
 
         # buttons style
-        self.btn_style = ttk.Style()
-        self.btn_style.configure('TButton', background='white')
+        ttk.Style().configure(
+            'TButton', 
+            font=('Helvetica', 11),
+            width=5,
+            background='#FFFFE0',
+        )
 
         # row 1
-        self.btn_seven = ttk.Button(self.frm_buttons, text='7', width=WIDTH, 
-                                    command=lambda: self.controller.on_click_button('7')
-                                    ).grid(row=2, column=0, ipadx=IPADX, ipady=IPADY)
-        self.btn_eight = ttk.Button(self.frm_buttons, text='8', width=WIDTH, 
-                                    command=lambda: self.controller.on_click_button('8')
-                                    ).grid(row=2, column=1, ipadx=IPADX, ipady=IPADY)
-        self.btn_nine = ttk.Button(self.frm_buttons, text='9', width=WIDTH, 
-                                   command=lambda: self.controller.on_click_button('9')
-                                   ).grid(row=2, column=2, ipadx=IPADX, ipady=IPADY)
-        self.btn_div = ttk.Button(self.frm_buttons, text='÷', width=WIDTH, 
-                                  command=lambda: self.controller.on_click_button('÷')
-                                  ).grid(row=2, column=3, ipadx=IPADX, ipady=IPADY)
-        self.btn_undo = ttk.Button(self.frm_buttons, text='Deshacer', width=WIDTH, 
-                                   command=lambda: self.controller.on_click_function('Deshacer')
-                                   ).grid(row=2, column=4, ipadx=IPADX, ipady=IPADY)
-        self.btn_clear = ttk.Button(self.frm_buttons, text='Limpiar', width=WIDTH, 
-                                    command=lambda: self.controller.on_click_function('Limpiar')
-                                    ).grid(row=2, column=5, ipadx=IPADX, ipady=IPADY)
+        self.btn_seven = ttk.Button(self.frm_buttons, text='7', 
+            command=lambda: self.controller.on_click_button('7')
+            ).grid(row=1, column=0, ipadx=IPADX, ipady=IPADY)
+        self.btn_eight = ttk.Button(self.frm_buttons, text='8', 
+            command=lambda: self.controller.on_click_button('8')
+            ).grid(row=1, column=1, ipadx=IPADX, ipady=IPADY)
+        self.btn_nine = ttk.Button(self.frm_buttons, text='9',
+            command=lambda: self.controller.on_click_button('9')
+            ).grid(row=1, column=2, ipadx=IPADX, ipady=IPADY)
+        self.btn_div = ttk.Button(self.frm_buttons, text='÷',
+            command=lambda: self.controller.on_click_button('÷')
+            ).grid(row=1, column=3, ipadx=IPADX, ipady=IPADY)
+        self.btn_square = ttk.Button(self.frm_buttons, text='x²', 
+            command=lambda: self.controller.click_button('\u00b2')
+            ).grid(row=1, column=4, ipadx=IPADX, ipady=IPADY)
 
         # row 2
-        self.btn_four = ttk.Button(self.frm_buttons, text='4', width=WIDTH, 
-                                   command=lambda: self.controller.on_click_button('4')
-                                   ).grid(row=3, column=0, ipadx=IPADX, ipady=IPADY)
-        self.btn_five = ttk.Button(self.frm_buttons, text='5', width=WIDTH, 
-                                   command=lambda: self.controller.on_click_button('5')
-                                   ).grid(row=3, column=1, ipadx=IPADX, ipady=IPADY)
-        self.btn_six = ttk.Button(self.frm_buttons, text='6', width=WIDTH, 
-                                  command=lambda: self.controller.on_click_button('6')
-                                  ).grid(row=3, column=2, ipadx=IPADX, ipady=IPADY)
-        self.btn_mul = ttk.Button(self.frm_buttons, text='x', width=WIDTH, 
-                                  command=lambda: self.controller.on_click_button('x')
-                                  ).grid(row=3, column=3, ipadx=IPADX, ipady=IPADY)
-        self.btn_rig_par = ttk.Button(self.frm_buttons, text='(', width=WIDTH, 
-                                      command=lambda: self.controller.on_click_button('(')
-                                      ).grid(row=3, column=4, ipadx=IPADX, ipady=IPADY)
-        self.btn_left_par = ttk.Button(self.frm_buttons, text=')', width=WIDTH, 
-                                       command=lambda: self.controller.on_click_button(')')
-                                       ).grid(row=3, column=5, ipadx=IPADX, ipady=IPADY)
-
+        self.btn_four = ttk.Button(self.frm_buttons, text='4',
+            command=lambda: self.controller.on_click_button('4')
+            ).grid(row=2, column=0, ipadx=IPADX, ipady=IPADY)
+        self.btn_five = ttk.Button(self.frm_buttons, text='5',
+            command=lambda: self.controller.on_click_button('5')
+            ).grid(row=2, column=1, ipadx=IPADX, ipady=IPADY)
+        self.btn_six = ttk.Button(self.frm_buttons, text='6',  
+            command=lambda: self.controller.on_click_button('6')
+            ).grid(row=2, column=2, ipadx=IPADX, ipady=IPADY)
+        self.btn_mul = ttk.Button(self.frm_buttons, text='x',  
+            command=lambda: self.controller.on_click_button('x')
+            ).grid(row=2, column=3, ipadx=IPADX, ipady=IPADY)
+        ttk.Button(self.frm_buttons, text='x⁻¹', 
+            command=lambda: self.controller.click_button('⁻¹')
+            ).grid(row=2, column=4, ipadx=IPADX, ipady=IPADY)
+        
         # row 3
-        self.btn_one = ttk.Button(self.frm_buttons, text='1', width=WIDTH, 
-                                  command=lambda: self.controller.on_click_button('1')
-                                  ).grid(row=4, column=0, ipadx=IPADX, ipady=IPADY)
-        self.btn_two = ttk.Button(self.frm_buttons, text='2', width=WIDTH, 
-                                  command=lambda: self.controller.on_click_button('2')
-                                  ).grid(row=4, column=1, ipadx=IPADX, ipady=IPADY)
-        self.btn_three = ttk.Button(self.frm_buttons, text='3', width=WIDTH, 
-                                    command=lambda: self.controller.on_click_button('3')
-                                    ).grid(row=4, column=2, ipadx=IPADX, ipady=IPADY)
-        self.btn_sub = ttk.Button(self.frm_buttons, text='-', width=WIDTH, 
-                                  command=lambda: self.controller.on_click_button('-')
-                                  ).grid(row=4, column=3, ipadx=IPADX, ipady=IPADY)
-        self.btn_square = ttk.Button(self.frm_buttons, text='x²', width=WIDTH, 
-                                     command=lambda: self.controller.on_click_button('\u00b2')
-                                     ).grid(row=4, column=4, ipadx=IPADX, ipady=IPADY)
-        self.btn_square_root = ttk.Button(self.frm_buttons, text='√', width=WIDTH, 
-                                          command=lambda: self.controller.on_click_button('\u00bd')
-                                          ).grid(row=4, column=5, ipadx=IPADX, ipady=IPADY)
+        self.btn_one = ttk.Button(self.frm_buttons, text='1',  
+            command=lambda: self.controller.on_click_button('1')
+            ).grid(row=3, column=0, ipadx=IPADX, ipady=IPADY)
+        self.btn_two = ttk.Button(self.frm_buttons, text='2',  
+            command=lambda: self.controller.on_click_button('2')
+            ).grid(row=3, column=1, ipadx=IPADX, ipady=IPADY)
+        self.btn_three = ttk.Button(self.frm_buttons, text='3', 
+            command=lambda: self.controller.on_click_button('3')
+            ).grid(row=3, column=2, ipadx=IPADX, ipady=IPADY)
+        self.btn_sub = ttk.Button(self.frm_buttons, text='-',  
+            command=lambda: self.controller.on_click_button('-')
+            ).grid(row=3, column=3, ipadx=IPADX, ipady=IPADY)
+        self.btn_square_root = ttk.Button(self.frm_buttons, text='√x', 
+            command=lambda: self.controller.on_click_button('\u00bd')
+            ).grid(row=3, column=4, ipadx=IPADX, ipady=IPADY)
 
         # row 4
-        self.btn_zero = ttk.Button(self.frm_buttons, text='0', width=WIDTH, 
-                                   command=lambda: self.controller.on_click_button('0')
-                                   ).grid(row=5, column=0, ipadx=IPADX, ipady=IPADY)
-        self.btn_dot = ttk.Button(self.frm_buttons, text=',', width=WIDTH, 
-                                  command=lambda: self.controller.on_click_button(',')
-                                  ).grid(row=5, column=1, ipadx=IPADX, ipady=IPADY)
-        self.btn_per = ttk.Button(self.frm_buttons, text='%', width=WIDTH, 
-                                  command=lambda: self.controller.on_click_button('%')
-                                  ).grid(row=5, column=2, ipadx=IPADX, ipady=IPADY)
-        self.btn_add = ttk.Button(self.frm_buttons, text='+', width=WIDTH, 
-                                  command=lambda: self.controller.on_click_button('+')
-                                  ).grid(row=5, column=3, ipadx=IPADX, ipady=IPADY)
-        self.btn_equals = ttk.Button(self.frm_buttons, text='=', width=18, 
-                                     command=lambda: self.controller.on_click_function('=')
-                                     ).grid(row=5, column=4, columnspan=2, ipadx=IPADX, ipady=IPADY)
+        self.btn_zero = ttk.Button(self.frm_buttons, text='0',  
+            command=lambda: self.controller.on_click_button('0')
+            ).grid(row=4, column=0, ipadx=IPADX, ipady=IPADY)
+        self.btn_dot = ttk.Button(self.frm_buttons, text=',',  
+            command=lambda: self.controller.on_click_button(',')
+            ).grid(row=4, column=1, ipadx=IPADX, ipady=IPADY)
+        self.btn_per = ttk.Button(self.frm_buttons, text='%',  
+            command=lambda: self.controller.on_click_button('%')
+            ).grid(row=4, column=2, ipadx=IPADX, ipady=IPADY)
+        self.btn_add = ttk.Button(self.frm_buttons, text='+',  
+            command=lambda: self.controller.on_click_button('+')
+            ).grid(row=4, column=3, ipadx=IPADX, ipady=IPADY)
+        self.btn_factorial = ttk.Button(self.frm_buttons, text='x!',  
+            command=lambda: self.controller.on_click_function('!')
+            ).grid(row=4, column=4, ipadx=IPADX, ipady=IPADY)
+
+        # row 5
+        self.btn_clear = ttk.Button(self.frm_buttons, text='C', 
+            command=lambda: self.controller.clear_display()
+            ).grid(row=5, column=0, ipadx=IPADX, ipady=IPADY)
+        self.btn_undo = ttk.Button(self.frm_buttons, text='🠔', 
+            command=lambda: self.controller.undo_button()
+            ).grid(row=5, column=1, ipadx=IPADX, ipady=IPADY)
+        self.btn_rig_par = ttk.Button(self.frm_buttons, text='(', 
+            command=lambda: self.controller.on_click_button('(')
+            ).grid(row=5, column=2, ipadx=IPADX, ipady=IPADY)
+        self.btn_lef_par = ttk.Button(self.frm_buttons, text=')', 
+            command=lambda: self.controller.on_click_button(')')
+            ).grid(row=5, column=3, ipadx=IPADX, ipady=IPADY)
+        self.btn_equals = ttk.Button(self.frm_buttons, text='=', 
+            command=lambda: self.controller.equals_button()
+            ).grid(row=5, column=4, ipadx=IPADX, ipady=IPADY)
 
 
     def center_window(self, w, h):
