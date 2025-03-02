@@ -7,6 +7,7 @@
 """
 import tkinter as tk
 from tkinter import ttk
+from about import About
 
 IPADX = 6
 IPADY = 5
@@ -18,7 +19,7 @@ class Gui(tk.Tk):
     def __init__(self, controller):
         super().__init__()
         self.title('Calculator')
-        self.iconphoto(True, tk.PhotoImage(file='icons/calculadora.png'))
+        self.iconphoto(True, tk.PhotoImage(file='asset/images/calculator.png'))
         self.resizable(False, False)
         self.center_window(331, 401)
         self.controller = controller
@@ -26,14 +27,14 @@ class Gui(tk.Tk):
         self.var_display = tk.StringVar()
 
         # create menu icons
-        self.img_copy = tk.PhotoImage(file='icons/copy.gif')
-        self.img_paste = tk.PhotoImage(file='icons/paste.gif')
-        self.img_undo = tk.PhotoImage(file='icons/undo.gif')
-        self.img_redo = tk.PhotoImage(file='icons/redo.gif')
-        self.img_preferences = tk.PhotoImage(file='icons/preferences.gif')
-        self.img_exit = tk.PhotoImage(file='icons/exit.gif')
-        self.img_help = tk.PhotoImage(file='icons/help.png')
-        self.img_about = tk.PhotoImage(file='icons/about.gif')
+        self.img_copy = tk.PhotoImage(file='asset/images/copy.gif')
+        self.img_paste = tk.PhotoImage(file='asset/images/paste.gif')
+        self.img_undo = tk.PhotoImage(file='asset/images/undo.gif')
+        self.img_redo = tk.PhotoImage(file='asset/images/redo.gif')
+        self.img_preferences = tk.PhotoImage(file='asset/images/preferences.gif')
+        self.img_exit = tk.PhotoImage(file='asset/images/exit.gif')
+        self.img_help = tk.PhotoImage(file='asset/images/help.png')
+        self.img_about = tk.PhotoImage(file='asset/images/about.gif')
 
         # create menu bar
         self.menubar = tk.Menu(self, tearoff=0, relief=tk.FLAT)
@@ -42,20 +43,72 @@ class Gui(tk.Tk):
         # create menu file
         self.filemenu = tk.Menu(self.menubar, tearoff=0)
         self.menubar.add_cascade(label='Archivo', menu=self.filemenu)
-        self.filemenu.add_command(label='Copiar', command=None, accelerator='Ctrl+C', image=self.img_copy, compound=tk.LEFT)
-        self.filemenu.add_command(label='Pegar', command=None, accelerator='Ctrl+V', image=self.img_paste, compound=tk.LEFT)
-        self.filemenu.add_command(label='Deshacer', command=None, accelerator='Ctrl+Z', image=self.img_undo, compound=tk.LEFT)
-        self.filemenu.add_command(label='Rehacer', command=None, accelerator='Ctrl+Y', image=self.img_redo, compound=tk.LEFT)
+        self.filemenu.add_command(
+            label='Copiar', 
+            command=None, 
+            accelerator='Ctrl+C', 
+            image=self.img_copy, 
+            compound=tk.LEFT
+        )
+        self.filemenu.add_command(
+            label='Pegar', 
+            command=None, 
+            accelerator='Ctrl+V', 
+            image=self.img_paste, 
+            compound=tk.LEFT
+        )
+        self.filemenu.add_command(
+            label='Deshacer', 
+            command=None, 
+            accelerator='Ctrl+Z', 
+            image=self.img_undo, 
+            compound=tk.LEFT
+        )
+        self.filemenu.add_command(
+            label='Rehacer', 
+            command=None, 
+            accelerator='Ctrl+Y', 
+            image=self.img_redo, 
+            compound=tk.LEFT
+        )
         self.filemenu.add_separator()
-        self.filemenu.add_command(label='Preferencias', command=None, image=self.img_preferences, compound=tk.LEFT)
+        self.filemenu.add_command(
+            label='Preferencias', 
+            command=None, 
+            image=self.img_preferences, 
+            compound=tk.LEFT
+        )
         self.filemenu.add_separator()
-        self.filemenu.add_command(label='Salir', command=self.quit, accelerator='Ctrl+Q', image=self.img_exit, compound=tk.LEFT)
+        self.filemenu.add_command(
+            label='Salir', 
+            command=self.quit, 
+            accelerator='Ctrl+Q', 
+            image=self.img_exit, 
+            compound=tk.LEFT
+        )
 
         # create menu help
-        self.ayudamenu = tk.Menu(self.menubar, tearoff=0)
-        self.menubar.add_cascade(label='Ayuda', menu=self.ayudamenu)
-        self.ayudamenu.add_command(label='Ayuda', command=None, image=self.img_help, accelerator='F1', compound=tk.LEFT)
-        self.ayudamenu.add_command(label='Acerca de', command=None, image=self.img_about, compound=tk.LEFT)
+        self.ayudamenu = tk.Menu(
+            self.menubar, 
+            tearoff=0
+        )
+        self.menubar.add_cascade(
+            label='Ayuda', 
+            menu=self.ayudamenu
+        )
+        self.ayudamenu.add_command(
+            label='Ayuda', 
+            command=None, 
+            image=self.img_help, 
+            accelerator='F1', 
+            compound=tk.LEFT
+        )
+        self.ayudamenu.add_command(
+            label='Acerca de', 
+            command=self.window_about, 
+            image=self.img_about, 
+            compound=tk.LEFT
+        )
 
         # create display frame
         self.frm_display = ttk.Frame(self)
@@ -188,3 +241,9 @@ class Gui(tk.Tk):
     def start_mainloop(self):
         """Run the main window loop"""
         self.mainloop()
+
+
+    def window_about(self):
+        """Shows about window"""
+        about = About(self)
+        about.mainloop()

@@ -12,8 +12,14 @@ from gui import Gui
 class Controller:
     """Class that works as the application controller"""
     def __init__(self):
+        super().__init__()
         self.calculator = Calculator()
         self.gui = Gui(self)
+    
+
+    def start_gui(self):
+        """Call method Gui class"""
+        self.gui.start_mainloop()
 
 
     def on_click_button(self, caption):
@@ -37,8 +43,3 @@ class Controller:
         else:
             result = 'Function error'
             self.gui.var_display.set(result)
-
-
-    def start_gui(self):
-        """Call method Gui class"""
-        self.gui.start_mainloop()
