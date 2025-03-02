@@ -10,7 +10,6 @@ import math
 
 class Calculator:
     """Class that works as the application model"""
-
     def __init__(self):
         self.value = ''
         
@@ -45,8 +44,8 @@ class Calculator:
             temp = temp.replace(',', '.')
             temp = temp.replace('%', '/100')
             temp = temp.replace('\u00b2', '**2')
-            temp = temp.replace('\u00bd', '**(1/2)')
-            self.value = temp.replace('⁻¹', '**-1')
+            temp = temp.replace('⁻¹', '**-1')
+            self.value = temp.replace('\u00bd', '**(1/2)')
         return self.value
 
 
@@ -66,7 +65,7 @@ class Calculator:
             else:
                 return result
         except:
-            return 'Expresión incorrecta'
+            return 'Error'
 
 
     def equals_button(self):
@@ -74,19 +73,13 @@ class Calculator:
         self.replace_button()
         res = None
         try:
+            # TODO: 3!+5=11 o 5+3!=11
+            if '!' in self.value: 
+                temp = int(self.value.replace('!', ''))
+                self.value = str(math.factorial(temp))
             res = eval(self.value)
         except:
             res = 'ERROR'
         finally:
-            self.value = self.replace_point_result(
-                self.decimal_or_integer(res))
+            self.value = self.replace_point_result(self.decimal_or_integer(res))
         return self.value
-    
-
-    def factorial_button(n):
-        # n = int(n)
-        # if n == 0 or n == 1:
-        #     return 1
-        # else:
-        #     return n * factorial(n-1)
-        return math.factorial(n)

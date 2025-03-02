@@ -15,15 +15,14 @@ WIDTH = 7
 
 class Gui(tk.Tk):
     """Class that works as the application view"""
-
     def __init__(self, controller):
         super().__init__()
-        self.title('Calculadora')
+        self.title('Calculator')
         self.iconphoto(True, tk.PhotoImage(file='icons/calculadora.png'))
         self.resizable(False, False)
-        #self.center_window(335, 405) # 325, 380
+        self.center_window(331, 401)
         self.controller = controller
-        # 
+        # creaate instance
         self.var_display = tk.StringVar()
 
         # create menu icons
@@ -65,6 +64,7 @@ class Gui(tk.Tk):
         # row 0: display
         self.ety_display = tk.Entry(
             self.frm_display, 
+            # bind instance to widget
             textvariable=self.var_display, 
             width=21, # 17 
             justify=tk.RIGHT, 
@@ -106,7 +106,7 @@ class Gui(tk.Tk):
             command=lambda: self.controller.on_click_button('÷')
             ).grid(row=1, column=3, ipadx=IPADX, ipady=IPADY)
         self.btn_square = ttk.Button(self.frm_buttons, text='x²', 
-            command=lambda: self.controller.click_button('\u00b2')
+            command=lambda: self.controller.on_click_button('\u00b2')
             ).grid(row=1, column=4, ipadx=IPADX, ipady=IPADY)
 
         # row 2
@@ -123,7 +123,7 @@ class Gui(tk.Tk):
             command=lambda: self.controller.on_click_button('x')
             ).grid(row=2, column=3, ipadx=IPADX, ipady=IPADY)
         ttk.Button(self.frm_buttons, text='x⁻¹', 
-            command=lambda: self.controller.click_button('⁻¹')
+            command=lambda: self.controller.on_click_button('⁻¹')
             ).grid(row=2, column=4, ipadx=IPADX, ipady=IPADY)
         
         # row 3
@@ -157,7 +157,7 @@ class Gui(tk.Tk):
             command=lambda: self.controller.on_click_button('+')
             ).grid(row=4, column=3, ipadx=IPADX, ipady=IPADY)
         self.btn_factorial = ttk.Button(self.frm_buttons, text='x!',  
-            command=lambda: self.controller.on_click_function('!')
+            command=lambda: self.controller.on_click_button('!')
             ).grid(row=4, column=4, ipadx=IPADX, ipady=IPADY)
 
         # row 5

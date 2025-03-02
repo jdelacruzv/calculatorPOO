@@ -11,7 +11,6 @@ from gui import Gui
 
 class Controller:
     """Class that works as the application controller"""
-
     def __init__(self):
         self.calculator = Calculator()
         self.gui = Gui(self)
@@ -20,11 +19,12 @@ class Controller:
     def on_click_button(self, caption):
         """Send the clicks given by the user to the Calculator class"""
         result = self.calculator.click_button(caption)
+        # set(update) value to widget
         self.gui.var_display.set(result)
 
 
     def on_click_function(self, func):
-        """Call the functions: equal, clean or undo of the Calculator class"""
+        """Call the functions: equal, clean, undo or factorial of the Calculator class"""
         if func == '=':
             result = self.calculator.equals_button()
             self.gui.var_display.set(result)
@@ -34,10 +34,9 @@ class Controller:
         elif func == '🠔':
             result = self.calculator.undo_button()
             self.gui.var_display.set(result)
-        elif func == 'Deshacer':
-            result = self.calculator.button_undo()
+        else:
+            result = 'Function error'
             self.gui.var_display.set(result)
-            print(result)
 
 
     def start_gui(self):
