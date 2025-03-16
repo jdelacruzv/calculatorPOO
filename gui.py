@@ -1,20 +1,22 @@
 import tkinter as tk
 from tkinter import ttk
 from about import About
-
-IPADX = 6
-IPADY = 5
-WIDTH = 7
+import webbrowser
 
 
 class Gui(tk.Tk):
     """ Class that works as the application view """
+
+    IPADX = 6
+    IPADY = 5
+    WIDTH = 7
+
     def __init__(self, controller):
         super().__init__()
         self.title('Calculator')
         self.iconphoto(True, tk.PhotoImage(file='asset/images/calculator.png'))
         self.resizable(False, False)
-        self.center_window(331, 401)
+        # self.center_window(331, 401)
         self.controller = controller
         # creaate instance
         self.var_display = tk.StringVar()
@@ -35,30 +37,30 @@ class Gui(tk.Tk):
 
         # create menu file
         self.filemenu = tk.Menu(self.menubar, tearoff=0)
-        self.menubar.add_cascade(label='Archivo', menu=self.filemenu)
+        self.menubar.add_cascade(label='File', menu=self.filemenu)
         self.filemenu.add_command(
-            label='Copiar', 
+            label='Copy', 
             command=None, 
             accelerator='Ctrl+C', 
             image=self.img_copy, 
             compound=tk.LEFT
         )
         self.filemenu.add_command(
-            label='Pegar', 
+            label='Paste', 
             command=None, 
             accelerator='Ctrl+V', 
             image=self.img_paste, 
             compound=tk.LEFT
         )
         self.filemenu.add_command(
-            label='Deshacer', 
+            label='Undo', 
             command=None, 
             accelerator='Ctrl+Z', 
             image=self.img_undo, 
             compound=tk.LEFT
         )
         self.filemenu.add_command(
-            label='Rehacer', 
+            label='Redo', 
             command=None, 
             accelerator='Ctrl+Y', 
             image=self.img_redo, 
@@ -66,14 +68,14 @@ class Gui(tk.Tk):
         )
         self.filemenu.add_separator()
         self.filemenu.add_command(
-            label='Preferencias', 
+            label='Preferences', 
             command=None, 
             image=self.img_preferences, 
             compound=tk.LEFT
         )
         self.filemenu.add_separator()
         self.filemenu.add_command(
-            label='Salir', 
+            label='Exit', 
             command=self.quit, 
             accelerator='Ctrl+Q', 
             image=self.img_exit, 
@@ -86,18 +88,18 @@ class Gui(tk.Tk):
             tearoff=0
         )
         self.menubar.add_cascade(
-            label='Ayuda', 
+            label='Help', 
             menu=self.ayudamenu
         )
         self.ayudamenu.add_command(
-            label='Ayuda', 
-            command=None, 
+            label='Documentation', 
+            command=self.open_web_page, 
             image=self.img_help, 
             accelerator='F1', 
             compound=tk.LEFT
         )
         self.ayudamenu.add_command(
-            label='Acerca de', 
+            label='About', 
             command=self.window_about, 
             image=self.img_about, 
             compound=tk.LEFT
@@ -224,16 +226,6 @@ class Gui(tk.Tk):
             ).grid(row=5, column=4, ipadx=IPADX, ipady=IPADY)
 
 
-    def center_window(self, w, h):
-        """ Center window on the screen
-			:param w: width window
-			:param h: height window
-		"""
-        x = (self.winfo_screenwidth() - w) / 2
-        y = (self.winfo_screenheight() - h) / 2
-        self.geometry('%dx%d+%d+%d' % (w, h, x, y))
-
-
     def start_mainloop(self):
         """ Run the main window loop """
         self.mainloop()
@@ -243,3 +235,8 @@ class Gui(tk.Tk):
         """ Shows about window """
         about = About(self)
         about.mainloop()
+
+    
+    def open_web_page(self):
+        """ Open web page Tkinter documentation"""
+        webbrowser.open('https://www.tcl-lang.org/man/tcl9.0/TkCmd/index.html', new=2, autoraise=True)
