@@ -1,8 +1,3 @@
-"""
-    Author: José De La Cruz
-    Created: 2019-09-01
-    Modified: 2021-04-23
-"""
 import tkinter as tk
 import datetime as dt
 from tkinter import ttk
@@ -11,7 +6,7 @@ from utils import Utils
 
 
 class About(tk.Toplevel):
-	"""About popup widow to display Holybible general application description"""
+	""" About popup widow to display Holybible general application description """
 	def __init__(self, master):
 		super().__init__(master)
 		self.transient(master)		# make the window transient(transitorio)
@@ -117,13 +112,16 @@ class About(tk.Toplevel):
 
 
 	def center_window(self, w, h):
-		"""Center window"""
+		""" Center window on the screen
+			:param w: width window
+			:param h: height window
+		"""
 		x = (self.winfo_screenwidth() - w) / 2
 		y = (self.winfo_screenheight() - h) / 2
 		self.geometry('%dx%d+%d+%d' % (w, h, x, y))
 
 
 	def close(self):
-		"""Close window"""
+		""" Close window """
 		self.master.focus_set()
 		self.destroy()

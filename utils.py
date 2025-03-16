@@ -1,17 +1,13 @@
-"""
-    Author: José De La Cruz
-    Created: 2019-09-01
-    Modified: 2020-08-05
-"""
 import platform
 import sys
 import os
 from typing import Optional, Tuple
 
+
 class Utils:
 	@staticmethod
 	def open_text_file(filename):
-		"""Open file in read mode"""
+		""" Open file in read mode """
 		f = open(filename, 'r', encoding='utf-8')
 		res = f.read()
 		f.close()
@@ -20,7 +16,7 @@ class Utils:
 
 	@staticmethod
 	def open_file_variable(filename):
-		"""Open file in read mode, store rows in a list"""
+		""" Open file in read mode, store rows in a list """
 		f = open(filename, 'r', encoding='utf-8')
 		res = f.readlines()
 		f.close()
@@ -29,7 +25,7 @@ class Utils:
 
 	@staticmethod
 	def save_file_variable(filename, list_var):
-		"""Save the data: bible, book and chapter in the text file"""
+		""" Save the data: bible, book and chapter in the text file """
 		f = open(filename, 'w', encoding='utf-8')
 		for i in list_var:
 			f.writelines(str(i) + '\n') 
@@ -37,7 +33,7 @@ class Utils:
 
 
 	def platform_system_desc(self):
-		"""Get OS description"""
+		""" Get operating system description """
 		if platform.system() == "Linux":
 			try:
 				system_desc = os.name
@@ -52,7 +48,7 @@ class Utils:
 
 	@staticmethod
 	def get_os_architecture_number():
-		"""Get OS architecture number"""
+		""" Get operating system architecture number """
 		if "32" in platform.machine() and "64" not in platform.machine():
 			return "(32-bit)"
 		elif "64" in platform.machine() and "32" not in platform.machine():
@@ -63,7 +59,7 @@ class Utils:
 
 	@staticmethod
 	def get_python_version_string(version_info: Optional[Tuple] = None) -> str:
-		"""Get Python version"""
+		""" Get Python version """
 		if version_info is None:
 			version_info = sys.version_info
 		result = ".".join(map(str, version_info[:3]))

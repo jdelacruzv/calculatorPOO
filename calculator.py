@@ -1,10 +1,3 @@
-"""
-    A simple calculator with basic operations and a menu of options (OOP).
-
-    Author: José De La Cruz
-    Created: 2019-08-04
-    Modified: 2025-02-27
-"""
 import math
 
 
@@ -15,19 +8,19 @@ class Calculator:
         
 
     def click_button(self, caption): 
-        """Insert the clicks given by the user (numbers and symbols)"""
+        """ Insert the clicks given by the user (numbers and symbols) """
         self.value += caption
         return self.value
 
 
     def clear_button(self):
-        """Clean text box"""
+        """ Clean text box """
         self.value = ''
         return self.value
 
 
     def undo_button(self):
-        """Delete the last character and/or number entered"""
+        """ Delete the last character and/or number entered """
         if self.value != '':
             cadena = len(self.value)
             self.value = self.value[:cadena - 1]
@@ -37,7 +30,7 @@ class Calculator:
 
 
     def replace_button(self):
-        """Replace 'x' by '*' and '÷' by '/'"""
+        """ Replace 'x' by '*' and '÷' by '/' """
         if self.value != '':
             temp = self.value.replace('÷', '/')
             temp = temp.replace('x', '*')
@@ -51,13 +44,13 @@ class Calculator:
 
     @staticmethod
     def replace_point_result(val):
-        """Replace point by comma of the final result"""
+        """ Replace point by comma of the final result """
         return str(val).replace('.', ',')
 
 
     @staticmethod
     def decimal_or_integer(result):
-        """Returns the integer part of the final result"""
+        """ Returns the integer part of the final result """
         try:
             decimal, entera = math.modf(result)
             if decimal == 0.0:
@@ -69,7 +62,7 @@ class Calculator:
 
 
     def equals_button(self):
-        """Perform the data operation"""
+        """ Perform the data operation """
         self.replace_button()
         res = None
         try:

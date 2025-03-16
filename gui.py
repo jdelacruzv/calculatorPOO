@@ -1,10 +1,3 @@
-"""
-    A simple calculator with basic operations and a menu of options (OOP).
-
-    Author: José De La Cruz
-    Created: 2019-08-04
-    Modified: 2025-02-25
-"""
 import tkinter as tk
 from tkinter import ttk
 from about import About
@@ -15,7 +8,7 @@ WIDTH = 7
 
 
 class Gui(tk.Tk):
-    """Class that works as the application view"""
+    """ Class that works as the application view """
     def __init__(self, controller):
         super().__init__()
         self.title('Calculator')
@@ -232,18 +225,21 @@ class Gui(tk.Tk):
 
 
     def center_window(self, w, h):
-        """Center window"""
+        """ Center window on the screen
+			:param w: width window
+			:param h: height window
+		"""
         x = (self.winfo_screenwidth() - w) / 2
         y = (self.winfo_screenheight() - h) / 2
         self.geometry('%dx%d+%d+%d' % (w, h, x, y))
 
 
     def start_mainloop(self):
-        """Run the main window loop"""
+        """ Run the main window loop """
         self.mainloop()
 
 
     def window_about(self):
-        """Shows about window"""
+        """ Shows about window """
         about = About(self)
         about.mainloop()
