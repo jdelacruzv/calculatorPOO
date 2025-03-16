@@ -42,14 +42,12 @@ class Calculator:
         return self.value
 
 
-    @staticmethod
-    def replace_point_result(val):
+    def replace_point_result(self, val):
         """ Replace point by comma of the final result """
         return str(val).replace('.', ',')
 
 
-    @staticmethod
-    def decimal_or_integer(result):
+    def decimal_or_integer(self, result):
         """ Returns the integer part of the final result """
         try:
             dec_part, int_part = math.modf(result)
