@@ -15,7 +15,7 @@ class Utils:
 
 
 	@staticmethod
-	def open_file_variable(filename):
+	def open_variable_file(filename):
 		""" Open file in read mode, store rows in a list """
 		f = open(filename, 'r', encoding='utf-8')
 		res = f.readlines()
@@ -24,7 +24,7 @@ class Utils:
 
 
 	@staticmethod
-	def save_file_variable(filename, list_var):
+	def save_variable_file(filename, list_var):
 		""" Save the data: bible, book and chapter in the text file """
 		f = open(filename, 'w', encoding='utf-8')
 		for i in list_var:
