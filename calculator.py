@@ -22,11 +22,11 @@ class Calculator:
     def undo_button(self):
         """ Delete the last character and/or number entered """
         if self.value != '':
-            cadena = len(self.value)
-            self.value = self.value[:cadena - 1]
+            char_chain = len(self.value)
+            self.value = self.value[:char_chain - 1]
             return self.value
         else:
-            return 'No hay datos'
+            return ''
 
 
     def replace_button(self):
@@ -52,9 +52,9 @@ class Calculator:
     def decimal_or_integer(result):
         """ Returns the integer part of the final result """
         try:
-            decimal, entera = math.modf(result)
-            if decimal == 0.0:
-                return int(entera)
+            dec_part, int_part = math.modf(result)
+            if dec_part == 0.0:
+                return int(int_part)
             else:
                 return result
         except:
@@ -64,15 +64,15 @@ class Calculator:
     def equals_button(self):
         """ Perform the data operation """
         self.replace_button()
-        res = None
+        result = None
         try:
             # TODO: 3!+5=11 o 5+3!=11
             if '!' in self.value: 
                 temp = int(self.value.replace('!', ''))
                 self.value = str(math.factorial(temp))
-            res = eval(self.value)
+            result = eval(self.value)
         except:
-            res = 'ERROR'
+            result = 'Error'
         finally:
-            self.value = self.replace_point_result(self.decimal_or_integer(res))
+            self.value = self.replace_point_result(self.decimal_or_integer(result))
         return self.value
