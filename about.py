@@ -11,11 +11,10 @@ class About(tk.Toplevel):
 		super().__init__(master)
 		self.transient(master)		# make the window transient(transitorio)
 		self.grab_set()				# make the window modal
-		self.title('Acerca de Calculator')
+		self.title('About Calculator')
 		self.resizable(False, False)
 		self.protocol("WM_DELETE_WINDOW", self.close)
 		self.utils = Utils()
-		self.center_window(640, 500)
 		self.focus_set()
 
 		# main notebook
@@ -24,7 +23,7 @@ class About(tk.Toplevel):
 
 		# frame for information tab
 		self.tab_info = ttk.Frame(self.nb_about)
-		self.nb_about.add(self.tab_info, text='Información')
+		self.nb_about.add(self.tab_info, text='Information')
 		self.nb_about.pack(fill=tk.BOTH, expand=tk.YES)
 
 		self.img_about = tk.PhotoImage(file='asset/images/calculator.png')
@@ -34,74 +33,84 @@ class About(tk.Toplevel):
 		self.lbl_title_info.pack(side=tk.TOP)
 		self.lbl_title_info.configure(font=('Helvatica', 20, 'bold'))
 
-		syst = self.utils.platform_system_desc()  							  # get OS description
-		lang = '\nPython {}'.format(self.utils.get_python_version_string())   # get Python version
-		#lib = '\nTk {}'. format(self.utils.get_tk_version_str())
-		lib = '\nTk {}'.format(self.tk.call('info', 'patchlevel'))			  # get Tk version
-
-		self.lbl_platform_system = ttk.Label(self.tab_info, justify=tk.CENTER, text="{} {} {}". format(syst, lang, lib))
-		self.lbl_platform_system.pack(side=tk.TOP, pady=30)
-		self.lbl_platform_system.configure(font=('Helvatica', 10))
+		txt_sys = self.utils.platform_system_desc()  							  # get OS description
+		txt_lang = '\nPython {}'.format(self.utils.get_python_version_string())   # get Python version
+		# txt_lib = '\nTk {}'. format(self.utils.get_tk_version_str())
+		txt_lib = '\nTk {}'.format(self.tk.call('info', 'patchlevel'))			  # get Tk version
+		self.lbl_sys = ttk.Label(self.tab_info, justify=tk.CENTER, text='{} {} {}'.format(txt_sys, txt_lang, txt_lib))
+		self.lbl_sys.pack(side=tk.TOP, pady=30)
+		self.lbl_sys.configure(font=('Helvatica', 10))
 
 		current_year = dt.datetime.now().year
-		txt = f'Copyright (c) 2019-{current_year} José De La Cruz \n @Todos los derechos reservados'
-		self.lbl_right_info = ttk.Label(self.tab_info, text=txt, justify=tk.CENTER)
-		self.lbl_right_info.pack(side=tk.TOP)
-		self.lbl_right_info.configure(font=('Helvatica', 10))
+		txt_year = f'Copyright (c) 2019-{current_year}' 
+		txt_all = '\n@All rights reserved'
+		self.lbl_info_year = ttk.Label(self.tab_info, justify=tk.CENTER, text='{} {}'.format(txt_year, txt_all))
+		self.lbl_info_year.pack(side=tk.TOP)
+		self.lbl_info_year.configure(font=('Helvatica', 10))
+		txt_name = 'Jose De La Cruz'
+		self.lbl_info_name = ttk.Label(self.tab_info, text=txt_name, justify=tk.CENTER)
+		self.lbl_info_name.pack(side=tk.TOP)
+		self.lbl_info_name.configure(foreground='blue', font=('Helvatica', 10))
 
 		# frame for credit tab
 		self.tab_credit = ttk.Frame(self.nb_about)
-		self.nb_about.add(self.tab_credit, text='Créditos')
+		self.nb_about.add(self.tab_credit, text='Credits')
 		self.nb_about.pack(fill=tk.BOTH, expand=tk.YES)
 		
-		self.lbl_title_credit = ttk.Label(self.tab_credit, text='Desarrolladores')
+		self.lbl_title_credit = ttk.Label(self.tab_credit, text='Developers')
 		self.lbl_title_credit.pack(padx=20, pady=30)
-		self.lbl_title_credit.configure(font=('Helvatica', 20, 'bold'))
+		self.lbl_title_credit.configure(font=('Calibri', 26, 'bold'))
 
-		self.lbl_name_credit1 = ttk.Label(self.tab_credit, text='José De La Cruz')
+		self.lbl_name_credit1 = ttk.Label(self.tab_credit, text='Jose De La Cruz')
 		self.lbl_name_credit1.pack()
-		self.lbl_name_credit1.configure(font=('Verdana', 10, 'bold'))
-
-		self.lbl_email_credit1 = ttk.Label(self.tab_credit, text='<jldlcv@gmail.com>')
+		self.lbl_name_credit1.configure(font=('Verdana', 11))
+		self.lbl_email_credit1 = ttk.Label(self.tab_credit, text='jldlcv@gmail.com')
 		self.lbl_email_credit1.pack()
-		self.lbl_email_credit1.configure(font=('Verdana', 10))
+		self.lbl_email_credit1.configure(foreground='blue', font=('Verdana', 10, 'underline'))
 
 		# set horizontal separator bar to white
 		ttk.Label(self.tab_credit, text='').pack(side=tk.TOP)
 
 		self.lbl_name_credit2 = ttk.Label(self.tab_credit, text='Luis Castillo')
 		self.lbl_name_credit2.pack()
-		self.lbl_name_credit2.configure(font=('Verdana', 10, 'bold'))
-
-		self.lbl_email_credit2 = ttk.Label(self.tab_credit, text='<lcastillovillena@gmail.com>')
+		self.lbl_name_credit2.configure(font=('Verdana', 11))
+		self.lbl_email_credit2 = ttk.Label(self.tab_credit, text='lcastillovillena@gmail.com')
 		self.lbl_email_credit2.pack()
-		self.lbl_email_credit2.configure(font=('Verdana', 10))
+		self.lbl_email_credit2.configure(foreground='blue', font=('Verdana', 10, 'underline'))
 
 		# set horizontal separator bar to white
 		ttk.Label(self.tab_credit, text='').pack(side=tk.TOP)
 
 		self.lbl_name_credit3 = ttk.Label(self.tab_credit, text='Gloria Sánchez')
 		self.lbl_name_credit3.pack()
-		self.lbl_name_credit3.configure(font=('Verdana', 10, 'bold'))
-
-		self.lbl_email_credit3 = ttk.Label(self.tab_credit, text='<glorypaty247@gmail.com>')
+		self.lbl_name_credit3.configure(font=('Verdana', 11))
+		self.lbl_email_credit3 = ttk.Label(self.tab_credit, text='glorypaty247@gmail.com')
 		self.lbl_email_credit3.pack()
-		self.lbl_email_credit3.configure(font=('Verdana', 10))
+		self.lbl_email_credit3.configure(foreground='blue', font=('Verdana', 10, 'underline'))
 
 		# set horizontal separator bar to white
 		ttk.Label(self.tab_credit, text='').pack(side=tk.TOP)
 
 		self.lbl_name_credit4 = ttk.Label(self.tab_credit, text='Stefano De La Cruz')
 		self.lbl_name_credit4.pack()
-		self.lbl_name_credit4.configure(font=('Verdana', 10, 'bold'))
-
-		self.lbl_email_credit4 = ttk.Label(self.tab_credit, text='<delacruzstefano27@gmail.com>')
+		self.lbl_name_credit4.configure(font=('Verdana', 11))
+		self.lbl_email_credit4 = ttk.Label(self.tab_credit, text='delacruzstefano27@gmail.com')
 		self.lbl_email_credit4.pack()
-		self.lbl_email_credit4.configure(font=('Verdana', 10))
+		self.lbl_email_credit4.configure(foreground='blue', font=('Verdana', 10, 'underline'))
+
+		# set horizontal separator bar to white
+		ttk.Label(self.tab_credit, text='').pack(side=tk.TOP)
+
+		self.lbl_name_credit4 = ttk.Label(self.tab_credit, text='Nestor Silva')
+		self.lbl_name_credit4.pack()
+		self.lbl_name_credit4.configure(font=('Verdana', 11))
+		self.lbl_email_credit4 = ttk.Label(self.tab_credit, text='nestor.silva@gmail.com')
+		self.lbl_email_credit4.pack()
+		self.lbl_email_credit4.configure(foreground='blue', font=('Verdana', 10, 'underline'))
 
 		# frame for license tab
 		self.tab_license = ttk.Frame(self.nb_about)
-		self.nb_about.add(self.tab_license, text='Licencia')
+		self.nb_about.add(self.tab_license, text='License')
 		self.nb_about.pack(fill=tk.BOTH, expand=tk.YES)
 
 		self.txt_license = ScrolledText(self.tab_license, undo=True, wrap=tk.WORD, height=27) # width=80
@@ -110,15 +119,15 @@ class About(tk.Toplevel):
 		# make text widget 'read-only'
 		self.txt_license.configure(state=tk.DISABLED)
 
-
-	def center_window(self, w, h):
-		""" Center window on the screen
-			:param w: width window
-			:param h: height window
-		"""
-		x = (self.winfo_screenwidth() - w) / 2
-		y = (self.winfo_screenheight() - h) / 2
-		self.geometry('%dx%d+%d+%d' % (w, h, x, y))
+		# close button with image
+		self.img_close = tk.PhotoImage(file='asset/images/close.gif')
+		tk.Button(
+			self, 
+			text='Close', 
+			image=self.img_close, 
+			compound=tk.LEFT, 
+			command=self.close
+		).pack(side=tk.RIGHT, padx=5, pady=5)
 
 
 	def close(self):
